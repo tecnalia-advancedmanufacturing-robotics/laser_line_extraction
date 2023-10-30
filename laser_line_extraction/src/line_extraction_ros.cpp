@@ -16,7 +16,7 @@ namespace line_extraction
   {
     loadParameters();
     line_publisher_ = this->create_publisher<laser_line_extraction_interfaces::msg::LineSegmentList>("line_segments", 1);
-    scan_subscriber_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic_, 1, std::bind(&LineExtractionROS::laserScanCallback, this, std::placeholders::_1));
+    scan_subscriber_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic_, rclcpp::SensorDataQoS(), std::bind(&LineExtractionROS::laserScanCallback, this, std::placeholders::_1));
     if (pub_markers_)
     {
       marker_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("line_markers", 1);
